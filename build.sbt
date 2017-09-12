@@ -22,3 +22,4 @@ lazy val server = project.in(file("server"))
 lazy val client = project.in(file("client"))
   .dependsOn(base)
   .settings(basicSettings: _*)
+
