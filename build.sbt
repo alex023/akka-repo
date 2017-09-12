@@ -2,7 +2,7 @@ name := "akka-repo"
 val basicSettings = Seq(
   version := "0.1",
   scalaVersion := "2.12.3",
-  libraryDependencies += "com.typesafe.akka" % "akka-actor_2.12" % "2.5.4"
+  libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.5.4"
 )
 
 lazy val root = Project(id = "akka-repo-root", base = file("."))
