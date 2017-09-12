@@ -1,9 +1,9 @@
 package message
 
-sealed class Messages {
+sealed trait ChatMessage
 
-  class Request()
+case object Connect extends ChatMessage
 
-  class Response()
+case class Request(content: String) extends ChatMessage
 
-}
+case class Response(ok: Boolean) extends ChatMessage
