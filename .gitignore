@@ -1,2 +1,6 @@
 *.class
 *.log
+
+# external packages folder
+target/
+.idea/
