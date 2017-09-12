@@ -7,7 +7,13 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/base" />
+            <option value="$PROJECT_DIR$/base/project" />
+            <option value="$PROJECT_DIR$/client" />
+            <option value="$PROJECT_DIR$/client/project" />
             <option value="$PROJECT_DIR$/project" />
+            <option value="$PROJECT_DIR$/server" />
+            <option value="$PROJECT_DIR$/server/project" />
           </set>
         </option>
         <option name="sbtVersion" value="0.13.16" />

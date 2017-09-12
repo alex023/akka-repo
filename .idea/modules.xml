@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/akka-repo.iml" filepath="$PROJECT_DIR$/.idea/modules/akka-repo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/akka-repo-build.iml" filepath="$PROJECT_DIR$/.idea/modules/akka-repo-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/akka-repo-root.iml" filepath="$PROJECT_DIR$/.idea/modules/akka-repo-root.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/akka-repo-root-build.iml" filepath="$PROJECT_DIR$/.idea/modules/akka-repo-root-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/base/base.iml" filepath="$PROJECT_DIR$/base/base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/base-build.iml" filepath="$PROJECT_DIR$/.idea/modules/base-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/client/client.iml" filepath="$PROJECT_DIR$/client/client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/client-build.iml" filepath="$PROJECT_DIR$/.idea/modules/client-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/server/server.iml" filepath="$PROJECT_DIR$/server/server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/server-build.iml" filepath="$PROJECT_DIR$/.idea/modules/server-build.iml" />
     </modules>
   </component>
 </project>
