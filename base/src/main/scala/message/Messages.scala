@@ -4,6 +4,7 @@ sealed trait ChatMessage
 
 case object Connect extends ChatMessage
 
-case class Request(content: String) extends ChatMessage
+case object Connected extends ChatMessage
 
-case class Response(ok: Boolean) extends ChatMessage
+case class NewMsg(content: String) extends ChatMessage
+
