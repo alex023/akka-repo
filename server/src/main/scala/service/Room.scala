@@ -23,8 +23,9 @@ class Room extends Actor {
     case Terminated =>
       onlineMember.remove(context.sender())
       println(s"remote ${context.sender()} is removed!")
+    case "get"=>onlineMember.size
     case _ =>
-      println("not implement")
+      throw new ClassNotFoundException
   }
 
 }

@@ -7,7 +7,9 @@ val basicSettings = Seq(
   //  crossScalaVersions := Seq("2.11.11", "2.12.3"), // 用于跨多版本Scala编译，一般只在framework或library时需要。
 
   libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.5.4",
-  libraryDependencies += "com.typesafe.akka" %% "akka-remote" % "2.5.4"
+  libraryDependencies += "com.typesafe.akka" %% "akka-remote" % "2.5.4",
+  libraryDependencies += "com.typesafe.akka" %% "akka-testkit" % "2.5.4" % "test",
+  libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.0-SNAP9" % "test"
 )
 
 lazy val root = Project(id = "akka-repo-root", base = file("."))

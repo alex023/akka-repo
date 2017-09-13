@@ -1,9 +1,10 @@
-package service
+package service_client
 
 
 import akka.actor.Actor
 import message.{Request, Response}
-class User extends Actor {
+
+class Visitor extends Actor {
   private var count = 0
 
   def Count(): Int = {
@@ -12,7 +13,7 @@ class User extends Actor {
   }
 
   override def receive: Receive = {
-    case Response(ok) =>println("user receive response:",ok)
+    case Response(ok) => println("user receive response:", ok)
     case _ => println("user receive server:", Count)
   }
 }
