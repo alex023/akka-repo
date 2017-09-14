@@ -10,6 +10,7 @@ val basicSettings = Seq(
   libraryDependencies += "com.typesafe.akka" %% "akka-remote" % "2.5.4",
   libraryDependencies += "com.typesafe.akka" %% "akka-testkit" % "2.5.4" % "test",
   libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.0-SNAP9" % "test"
+
 )
 
 lazy val root = Project(id = "akka-repo-root", base = file("."))
@@ -23,6 +24,6 @@ lazy val server = project.in(file("server"))
   .settings(basicSettings: _*)
 
 lazy val client = project.in(file("client"))
-  .dependsOn(base)
+  .dependsOn(base,server)
   .settings(basicSettings: _*)
 

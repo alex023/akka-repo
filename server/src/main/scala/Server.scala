@@ -1,17 +1,20 @@
 package main
 
-import java.util.concurrent.TimeUnit
 
 import akka.actor.{ActorSystem, Props}
+import service.Room
 
-object  Server {
+object Server {
 
   def main(args: Array[String]): Unit = {
-    val system = ActorSystem("ReactiveEnterprise")
-    val roomRef = system.actorOf(Props[service.Room], "room")
-    roomRef ! "ok"
-    TimeUnit.SECONDS.sleep(10)
-    system.terminate()
+    startRemoteCalculatorSystem()
+  }
+
+  def startRemoteCalculatorSystem(): Unit = {
+    val system = ActorSystem("ChatServer")
+    system.actorOf(Props[Room], "room")
+
+    println("Started ChatServer - waiting for messages")
   }
 
 }
