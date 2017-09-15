@@ -1,14 +1,13 @@
 package service
 
-
+import Define.DependService
 import akka.actor.{Actor, ActorIdentity, ActorRef, Identify, ReceiveTimeout, Terminated}
-import message.{BroadMsg, Connect, Connected, NewMsg}
+import message.Connect
 
 import concurrent.duration._
 
-class Visitor(path: String) extends Actor {
-  private var count = 0
-  val user = "visitor"
+class Agent() extends Actor {
+  private val  path = DependService.path
 
   sendIdentifyRequest()
 
@@ -24,7 +23,7 @@ class Visitor(path: String) extends Actor {
   def receive = identifying
 
   def identifying: Actor.Receive = {
-    case ActorIdentity(`path`, Some(actor)) =>
+    case ActorIdentity(`DependService`, Some(actor)) =>
       context.watch(actor)
       context.become(active(actor))
     case ActorIdentity(`path`, None) => println(s"Remote actor not available: $path")
@@ -32,21 +31,10 @@ class Visitor(path: String) extends Actor {
     case _ => println("Not ready yet")
   }
 
-
   def active(actor: ActorRef): Actor.Receive = {
-    case Connected => println(s"$user connected")
-    case msg: NewMsg =>
-      count += 1
-      println(s"$user push msg:$msg.content")
-      actor ! msg
-    case BroadMsg(content) =>
-      println(s"$user receive msg: $content")
-    case "getMsgNum" => sender ! count
-    case Terminated(`actor`) =>
-      println("Calculator terminated")
-      sendIdentifyRequest()
+    case Terminated(`actor`)=>
       context.become(identifying)
-    case ReceiveTimeout =>
-    // ignore
+    case _ =>
+    //do nothing
   }
 }

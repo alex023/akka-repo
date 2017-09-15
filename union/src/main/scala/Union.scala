@@ -1,10 +1,10 @@
-package main
+package union
 
 
 import akka.actor.{ActorSystem, Props}
 import service.Room
 
-object Server {
+object Union {
 
   def main(args: Array[String]): Unit = {
     startRemoteCalculatorSystem()

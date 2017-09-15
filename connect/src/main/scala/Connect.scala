@@ -5,10 +5,12 @@ import service.Visitor
 import scala.concurrent.duration._
 
 
-object Client {
+object Connect {
   def main(args: Array[String]): Unit = {
     startRemoteLookupSystem()
   }
+
+
 
   def startRemoteLookupSystem(): Unit = {
     val system = ActorSystem("client")
@@ -23,5 +25,6 @@ object Client {
       count += 1
       actor ! NewMsg(s"hello $count")
     }
+
   }
 }

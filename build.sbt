@@ -14,16 +14,19 @@ val basicSettings = Seq(
 )
 
 lazy val root = Project(id = "akka-repo-root", base = file("."))
-  .aggregate(client, server, base)
+  .aggregate(connect, union, world, base)
+
+lazy val connect = project.in(file("connect"))
+  .dependsOn(base, union)
+  .settings(basicSettings: _*)
 
 lazy val base = project.in(file("base"))
   .settings(basicSettings: _*)
 
-lazy val server = project.in(file("server"))
+lazy val union = project.in(file("union"))
   .dependsOn(base)
   .settings(basicSettings: _*)
 
-lazy val client = project.in(file("client"))
-  .dependsOn(base,server)
+lazy val world = project.in(file("world"))
+  .dependsOn(base)
   .settings(basicSettings: _*)
-
