@@ -5,12 +5,17 @@ object Agent {
   //所有游戏对象的全局索引，Gid->Agent
   private var agents = Map.empty[Int, Agent]
 
+  def load(): Unit = {
+    //todo:
+    //从数据库中加载
+  }
+
   def getAgent(agentId: Int): Option[Agent] = if (agents contains agentId) {
     Some(agents(agentId))
   } else None
 
   def getAgents(tId: Int): Vector[Agent] = {
-    agents.filter { case (key, agent) => agent.tid == tId }.values.toVector
+    agents.filter { case (_, agent) => agent.tid == tId }.values.toVector
   }
 
   def removeAgent(agentId: Int): Unit = {
@@ -29,9 +34,9 @@ object Agent {
 trait Agent {
   val id: Int
   val tid: Int
-  private var buffs = Map.empty[Int, Buf]
+  private var buffs = Map.empty[Int, Buff]
 
-  final def addBuf(buf: Buf): Unit = {
+  final def addBuf(buf: Buff): Unit = {
     buffs = buffs + (buf.id -> buf)
     onAddBuf(buf)
   }
@@ -43,7 +48,7 @@ trait Agent {
     }
   }
 
-  protected def onAddBuf(buf: Buf)
+  protected def onAddBuf(buf: Buff)
 
   protected def onRemoveBuf(id: Int)
 }
