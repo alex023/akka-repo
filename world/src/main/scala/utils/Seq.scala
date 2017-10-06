@@ -1,6 +1,7 @@
 package utils
 
-object ID {
+object Seq {
+  @volatile
   private var seq: Long = 0
 
   def next(): Long = {
