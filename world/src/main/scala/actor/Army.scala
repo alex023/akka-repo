@@ -4,7 +4,7 @@ import actor.Army._
 import akka.actor.FSM
 import scala.concurrent.duration._
 import message.ArmyProtocol.{ResourceOff, Start}
-import utils.ID
+import utils.Seq
 
 object Army {
 
@@ -28,8 +28,11 @@ object Army {
     }
   }
 
-  case class ArmyData(Id: Long = ID.next, moveSpeed: Int = 10, from: Place, to: Place){
-    implicit def intToDouble(x:Int):Double=x.toDouble
+  case class ArmyData(Id: Long = Seq.next,
+                      moveSpeed: Int = 10,
+                      from: Place,
+                      to: Place) {
+    implicit def intToDouble(x: Int): Double = x.toDouble
   }
 
   def apply(x: Int, y: Int): Place = {
@@ -55,18 +58,22 @@ class Army extends FSM[ArmyState, ArmyData] {
     case Event(ResourceOff, _) =>
       goto(ComeBack)
   }
-  when(Attacking,stateTimeout=1 second) {
-case Event(StateTimeout,_)=>
+  when(Attacking, stateTimeout = 1 second) {
+    case Event(StateTimeout, _) =>
       goto(ComeBack)
   }
-  when(ComeBack, stateTimeout = ((stateData.to-stateData.from) / stateData.moveSpeed) second) {
-    case Event(StateTimeout,_)=>
+  when(ComeBack,
+       stateTimeout =
+         ((stateData.to - stateData.from) / stateData.moveSpeed) second) {
+    case Event(StateTimeout, _) =>
       stop()
   }
   whenUnhandled {
     case Event(e, s) =>
-      log.warning("received unhandled request {} in state {}/{}", e, stateName, s)
+      log.warning("received unhandled request {} in state {}/{}",
+                  e,
+                  stateName,
+                  s)
       stay
   }
 }
-
