@@ -35,10 +35,10 @@ object Agent {
  * 在实现的时候，只需要在重载固定函数的时候，修改自身属性即可.
  * Note:Agent不支持多线程，在应用时需要确保同一时刻只会被一个方法驱动
  */
-trait Agent {
+abstract class Agent {
   val id: Long
   val tid: Int
-  private var buffs = new mutable.HashMap[Int, Buff]()
+  final private val buffs = new mutable.HashMap[Int, Buff]()
 
   final def addBuf(buf: Buff): Unit = {
     buffs += (buf.id -> buf)
@@ -47,15 +47,17 @@ trait Agent {
 
   final def removeBuf(bufId: Int): Unit = {
     if (buffs contains bufId) {
+      val buf = buffs(bufId)
       buffs -= bufId
-      onRemoveBuf(bufId)
+      onRemoveBuf(buf)
     }
   }
+
   final def currentBuf(): Vector[Buff] = {
     buffs.values.toVector
   }
 
   protected def onAddBuf(buf: Buff)
 
-  protected def onRemoveBuf(id: Int)
+  protected def onRemoveBuf(buf: Buff)
 }

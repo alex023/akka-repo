@@ -18,4 +18,4 @@ object Buff {
 }
 
 //游戏效果的属性定义，根据具体游戏确定该对象的属性
-case class Buff(id: Int, health: Float)
+case class Buff(id: Int, tid: Int, health: Float)
