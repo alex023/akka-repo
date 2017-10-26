@@ -9,7 +9,9 @@ val basicSettings = Seq(
   libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.5.4",
   libraryDependencies += "com.typesafe.akka" %% "akka-remote" % "2.5.4",
   libraryDependencies += "com.typesafe.akka" %% "akka-testkit" % "2.5.4" % "test",
-  libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.0-SNAP9" % "test"
+  libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.0-SNAP9" % "test",
+  libraryDependencies += "com.typesafe.akka" %% "akka-http" % "10.0.10",
+  libraryDependencies += "com.typesafe.akka" %% "akka-http-xml" % "10.0.10"
 
 )
 

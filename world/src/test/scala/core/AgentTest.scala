@@ -7,14 +7,14 @@ class AgentTest extends WordSpec with BeforeAndAfterAll with MustMatchers {
   class Building(override val id: Long,
                  override val tid: Int,
                  var health: Float)
-      extends Agent {
+      extends Agent(id, tid) {
 
     override protected def onAddBuf(buf: Buff): Unit = {
-      health += buf.health
+      health += buf.maxHP
     }
 
     override protected def onRemoveBuf(buf: Buff): Unit = {
-      health -= buf.health
+      health -= buf.maxHP
     }
   }
 
@@ -24,7 +24,7 @@ class AgentTest extends WordSpec with BeforeAndAfterAll with MustMatchers {
   override def beforeAll() {
     info("beforeAll")
     building = new Building(123, 1, 100)
-    buf = Buff(123, 1, 2)
+    buf = Buff(123, 1, 2, 15.0, 10.0, 5.0, 0.0, 0)
   }
 
   override def afterAll() {

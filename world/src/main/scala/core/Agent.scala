@@ -35,9 +35,7 @@ object Agent {
  * 在实现的时候，只需要在重载固定函数的时候，修改自身属性即可.
  * Note:Agent不支持多线程，在应用时需要确保同一时刻只会被一个方法驱动
  */
-abstract class Agent {
-  val id: Long
-  val tid: Int
+abstract class Agent(val id: Long, val tid: Int) {
   final private val buffs = new mutable.HashMap[Int, Buff]()
 
   final def addBuf(buf: Buff): Unit = {
@@ -56,8 +54,8 @@ abstract class Agent {
   final def currentBuf(): Vector[Buff] = {
     buffs.values.toVector
   }
-
+  //在buf施加的时候，对自身属性进行修改
   protected def onAddBuf(buf: Buff)
-
+  //在buf取消的时候，对自身属性进行修改
   protected def onRemoveBuf(buf: Buff)
 }

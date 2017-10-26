@@ -2,12 +2,14 @@ package message
 
 import akka.actor.ActorRef
 
-sealed trait ChatMessage
+sealed trait ClientState
 
-case object Connect extends ChatMessage
+case object Connect extends ClientState
 
-final case class Connected(actor: ActorRef) extends ChatMessage
+final case class Connected(actor: ActorRef) extends ClientState
 
-final case class NewMsg(content: String) extends ChatMessage
+case object Disconnect extends ClientState
 
-final case class BroadMsg(content: String) extends ChatMessage
+final case class NewMsg(content: String) extends ClientState
+
+final case class BroadMsg(content: String) extends ClientState

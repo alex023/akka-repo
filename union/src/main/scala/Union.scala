@@ -1,6 +1,5 @@
 package union
 
-
 import akka.actor.{ActorSystem, Props}
 import service.Room
 
@@ -15,6 +14,7 @@ object Union {
     system.actorOf(Props[Room], "room")
 
     println("Started ChatServer - waiting for messages")
+
   }
 
 }
