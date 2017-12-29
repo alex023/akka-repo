@@ -25,7 +25,6 @@ object Connect {
     //    }
     println("Started Connect Server")
     val system = ActorSystem("connect")
-    val actor = system.actorOf(Props(Server("localhost", 9999)))
-
+    val actor = system.actorOf(Props(Server("localhost", 9010)))
   }
 }

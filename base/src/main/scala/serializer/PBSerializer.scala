@@ -7,9 +7,7 @@ package serializer
   */
 package serializer
 
-import java.nio.charset.StandardCharsets
-
-import akka.serialization.Serializer
+import akka.serialization.SerializerWithStringManifest
 import com.trueaccord.scalapb.{GeneratedMessage, GeneratedMessageCompanion}
 import message.{LogicProto, PayProto, UnionProto}
 
@@ -44,49 +42,32 @@ object PBSerializer {
   val signCompress = 0x01
 }
 
-class PBSerializer extends Serializer {
+class PBSerializer extends SerializerWithStringManifest {
 
   import PBSerializer._
-  // If you need logging here, introduce a constructor that takes an ExtendedActorSystem.
-  // class MyOwnSerializer(actorSystem: ExtendedActorSystem) extends Serializer
-  // Get a logger using:
-  // private val logger = Logging(actorSystem, this)
 
-  // This is whether "fromBinary" requires a "clazz" or not
-  def includeManifest: Boolean = true
-
-  // Pick a unique identifier for your Serializer,
-  // you've got a couple of billions to choose from,
-  // 0 - 40 is reserved by Akka itself
   def identifier = 20171101
 
   // "toBinary" serializes the given object to an Array of Bytes
   def toBinary(obj: AnyRef): Array[Byte] = {
     // 将对象封装到Envelop，库不允许case
     val name = obj.getClass.getName
-    var serilized = Array.emptyByteArray
     obj match {
       case e: GeneratedMessage =>
-        serilized = e.toByteArray
+        e.toByteArray
+      case _ => Array.emptyByteArray
     }
-    StandardCharsets.UTF_8.name()
-    serilized
   }
 
   // "fromBinary" deserializes the given array,
   // using the type hint (if any, see "includeManifest" above)
-  def fromBinary(bytes: Array[Byte], clazz: Option[Class[_]]): AnyRef = {
-    // Put your code that deserializes here
-    //#...
-    clazz match {
-      case Some(e) if e.isInstanceOf[String] =>
-        val className = e.asInstanceOf[String]
-        register.get(className) match {
-          case Some(companion) =>
-            companion.parseFrom(bytes).asInstanceOf[AnyRef]
-          case _ => None
-        }
+  def fromBinary(bytes: Array[Byte], manifest: String): AnyRef = {
+    register.get(manifest) match {
+      case Some(companion) =>
+        companion.parseFrom(bytes).asInstanceOf[AnyRef]
+      case _ => None
     }
   }
 
+  override def manifest(o: AnyRef): String = ""
 }
