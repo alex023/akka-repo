@@ -1,7 +1,7 @@
 package union
 
 import akka.actor.{ActorSystem, Props}
-import service.Room
+import actor.Clan
 
 object Union {
 
@@ -11,7 +11,7 @@ object Union {
 
   def startRemoteCalculatorSystem(): Unit = {
     val system = ActorSystem("ChatServer")
-    system.actorOf(Props[Room], "room")
+    system.actorOf(Props[Clan], "room")
 
     println("Started ChatServer - waiting for messages")
 

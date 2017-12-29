@@ -10,7 +10,7 @@ import akka.actor.{
   ReceiveTimeout,
   Terminated
 }
-import akka.io.Tcp.{Connect, PeerClosed, Received, Write}
+import akka.io.Tcp.{PeerClosed, Received}
 
 import concurrent.duration._
 
@@ -61,13 +61,17 @@ class Agent(connect: ActorRef) extends Actor {
       context.self ! PoisonPill
     case Received(msg) =>
       //将客户端TCP发送的消息转发给backend
+      actor.forward()
       actor ! msg
+      actor forward ()
     case pushmsg =>
       //将backend消息，推送给客户端
       connect ! pushmsg
   }
+
 }
 
 object Agent {
   def apply(connect: ActorRef): Agent = new Agent(connect)
+
 }

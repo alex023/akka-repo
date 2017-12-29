@@ -270,3 +270,6 @@ typings/
 
 # dotenv environment variables file
 .env
+
+# 忽略当前自定义目录
+base/lib/

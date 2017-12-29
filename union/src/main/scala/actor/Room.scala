@@ -1,4 +1,4 @@
-package service
+package actor
 
 import akka.actor.{Actor, ActorRef, Identify, Terminated}
 import message.{BroadMsg, Connect, Connected, NewMsg}
@@ -14,6 +14,7 @@ class Room extends Actor {
       onlineMember.put(context.sender(), true)
       context.watch(context.sender())
       context.sender() ! Connected(self)
+      context.props
     case ms: NewMsg =>
       //接收到消息，并分发给在线玩家
       count += 1

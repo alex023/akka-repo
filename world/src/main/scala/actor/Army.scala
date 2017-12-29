@@ -2,6 +2,7 @@ package actor
 
 import actor.Army._
 import akka.actor.FSM
+
 import scala.concurrent.duration._
 import message.ArmyProtocol.{ResourceOff, Start}
 import utils.Seq
@@ -45,7 +46,7 @@ class Army extends FSM[ArmyState, ArmyData] {
   startWith(Idle, ArmyData(from = Place(0, 0), to = Place(0, 0)))
   when(Idle) {
     case Event(Start(to), _) =>
-      stateData.copy(to = to)
+      stateData.copy(to = stateData.to)
       goto(Depart)
   }
   when(Depart) {
