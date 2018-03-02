@@ -1,6 +1,6 @@
 package service
 
-import Define.DependService
+import define.DependService
 import akka.actor.{
   Actor,
   ActorIdentity,
@@ -12,7 +12,7 @@ import akka.actor.{
 }
 import akka.io.Tcp.{PeerClosed, Received}
 
-import concurrent.duration._
+import scala.concurrent.duration._
 
 class Agent(connect: ActorRef) extends Actor {
   private val path = DependService.path
@@ -34,6 +34,8 @@ class Agent(connect: ActorRef) extends Actor {
   }
 
   def receive = identifying
+
+  override def preStart(): Unit = super.preStart()
 
   //todo:在三秒钟内，实现客户端请求的验证和游戏服的对象绑定
   def identifying: Actor.Receive = {

@@ -9,7 +9,7 @@ name := "akka-repo"
 val basicSettings = Seq(
   version := "0.1",
   scalaVersion := "2.12.4",
-
+  resolvers += Resolver.sonatypeRepo("releases"),
   //  crossScalaVersions := Seq("2.11.11", "2.12.3"), // 用于跨多版本Scala编译，一般只在framework或library时需要。
   libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.5.8",
   libraryDependencies += "com.typesafe.akka" %% "akka-remote" % "2.5.8",
@@ -18,7 +18,8 @@ val basicSettings = Seq(
   libraryDependencies += "com.trueaccord.scalapb" %% "scalapb-runtime" % "0.6.7",
   libraryDependencies += "com.typesafe.slick" %% "slick" % "3.2.1",
   libraryDependencies += "org.slf4j" % "slf4j-nop" % "1.6.4",
-  libraryDependencies += "mysql" % "mysql-connector-java" % "8.0.8-dmr"
+  libraryDependencies += "mysql" % "mysql-connector-java" % "8.0.8-dmr",
+  libraryDependencies += "org.spire-math" %% "debox" % "0.8.0"
 
 )
 
