@@ -17,9 +17,9 @@ class SeqTest extends WordSpec with MustMatchers {
     }
     "多次调用 next后， current应该随之增加" in {
       val beforeCallNum = Seq.current()
-      val testNum = Random.nextInt(10000) + 1
-      for (i <- 0 until testNum) Seq next ()
-      Seq.current() must be(testNum + beforeCallNum)
+      val countNum = Random.nextInt(10000) + 1
+      for (i <- 0 until countNum) Seq next ()
+      Seq.current() must be(countNum + beforeCallNum)
     }
   }
   //class SeqTest extends FunSepc with MustMatchers {

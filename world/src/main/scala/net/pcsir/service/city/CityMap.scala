@@ -1,4 +1,4 @@
-package utils
+package net.pcsir.service.city
 
 import scala.language.postfixOps
 
@@ -176,8 +176,9 @@ class CityMap(var buildings: Map[Int, Building] = Map.empty) {
         innerAddingBuilding(newA, aBt)
         innerAddingBuilding(newB, bBt)
         true
+      } else {
+        false
       }
-      false
     }
   }
 
@@ -244,6 +245,7 @@ class CityMap(var buildings: Map[Int, Building] = Map.empty) {
 }
 
 object CityMap {
+  // 地图的范围大小为[0，44)的正方形
   val BOUNDARY_W: Int = 44
   val BOUNDARY_H: Int = 44
 

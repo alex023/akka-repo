@@ -17,7 +17,6 @@ object World {
 
   def xx(): Unit = {
     val src = Array(("a", 1), ("a", 2), ("b", 1), ("c", 1), ("c", 2))
-
     val container = (Map.empty[String, mutable.ArrayBuffer[Int]] /: src) {
       case (m, (key, value)) =>
         val buf: mutable.ArrayBuffer[Int] =
